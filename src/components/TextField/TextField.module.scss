@@ -1,0 +1,33 @@
+@import 'src/assets/styles/templates';
+
+.wrapper {
+  @include flex-col;
+  width: 100%;
+}
+
+.label {
+  color: $c_black;
+  font-weight: 400;
+  font-size: $fs_default;
+  line-height: 170%;
+  margin-bottom: 8px;
+}
+
+.input {
+  height: 50px;
+  width: 100%;
+
+  padding: 15px 20px;
+
+  border: 1px solid $c_grey;
+  border-radius: $br_default;
+  background-color: $c_white;
+  color: $c_black;
+
+  font-size: $fs_default;
+  font-weight: 400;
+
+  &:focus {
+    border-color: $c_black;
+  }
+}

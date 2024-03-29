@@ -1,0 +1,65 @@
+@import 'src/assets/styles/templates';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  padding: 14px 32px;
+  gap: 10px;
+
+  border-radius: $br_default;
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-size: $fs_default;
+  font-weight: 500;
+
+  transition: all 0.15s ease-in-out;
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+.outlined {
+  border: 1px solid $c_blue;
+  background-color: transparent;
+  color: $c_blue;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $c_blue;
+      color: white;
+    }
+  }
+
+  &:disabled {
+    color: $c_grey;
+    border: 1px solid $c_grey;
+    background-color: transparent;
+
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+.filled {
+  border: 1px solid $c_blue;
+  background-color: $c_blue;
+  color: white;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+      color: $c_blue;
+    }
+  }
+
+  &:disabled {
+    border: 1px solid $c_grey;
+    background-color: $c_grey;
+
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
