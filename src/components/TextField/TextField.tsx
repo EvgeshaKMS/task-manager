@@ -8,7 +8,6 @@ const TextField = ({
   label,
   className = '',
   wrapperClassName = '',
-  id,
   type = 'text',
   ...props
 }: TextFieldProps) => {
@@ -21,7 +20,7 @@ const TextField = ({
   return (
     <div className={wrapperStyles}>
       {label && (
-        <label className={styles.label} htmlFor={id}>
+        <label className={styles.label} htmlFor={props.id}>
           {label}
         </label>
       )}

@@ -1,0 +1,23 @@
+@import 'src/assets/styles/templates';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  max-width: 600px;
+  width: 100%;
+
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h2 {
+    font-size: $fs_large;
+  }
+}

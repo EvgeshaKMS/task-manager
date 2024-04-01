@@ -10,8 +10,9 @@
   gap: 10px;
 
   border-radius: $br_default;
+  border: 1px solid $c_blue;
+
   cursor: pointer;
-  border: 2px solid transparent;
   font-size: $fs_default;
   font-weight: 500;
 
@@ -23,7 +24,6 @@
 }
 
 .outlined {
-  border: 1px solid $c_blue;
   background-color: transparent;
   color: $c_blue;
 
@@ -44,7 +44,6 @@
   }
 }
 .filled {
-  border: 1px solid $c_blue;
   background-color: $c_blue;
   color: white;
 

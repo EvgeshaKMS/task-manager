@@ -30,4 +30,11 @@
   &:focus {
     border-color: $c_black;
   }
+
+  cursor: text;
+
+  &::-webkit-calendar-picker-indicator,
+  ::-webkit-date-and-time-value {
+    cursor: pointer;
+  }
 }
