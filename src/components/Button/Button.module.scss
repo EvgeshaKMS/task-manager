@@ -6,11 +6,11 @@
   align-items: center;
 
   width: fit-content;
-  padding: 14px 32px;
+  padding: 10px 20px;
   gap: 10px;
 
   border-radius: $br_default;
-  border: 1px solid $c_blue;
+  border: 1px solid var(--c_blue);
 
   cursor: pointer;
   font-size: $fs_default;
@@ -25,18 +25,18 @@
 
 .outlined {
   background-color: transparent;
-  color: $c_blue;
+  color: var(--c_blue);
 
   @media (hover: hover) {
     &:hover {
-      background-color: $c_blue;
+      background-color: var(--c_blue);
       color: white;
     }
   }
 
   &:disabled {
-    color: $c_grey;
-    border: 1px solid $c_grey;
+    color: var(--c_grey);
+    border: 1px solid var(--c_grey);
     background-color: transparent;
 
     opacity: 0.5;
@@ -44,19 +44,19 @@
   }
 }
 .filled {
-  background-color: $c_blue;
+  background-color: var(--c_blue);
   color: white;
 
   @media (hover: hover) {
     &:hover {
       background-color: transparent;
-      color: $c_blue;
+      color: var(--c_blue);
     }
   }
 
   &:disabled {
-    border: 1px solid $c_grey;
-    background-color: $c_grey;
+    border: 1px solid var(--c_grey);
+    background-color: var(--c_grey);
 
     opacity: 0.5;
     pointer-events: none;

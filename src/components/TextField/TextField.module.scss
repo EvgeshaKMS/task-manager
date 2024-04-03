@@ -6,7 +6,7 @@
 }
 
 .label {
-  color: $c_black;
+  color: var(--c_black);
   font-weight: 400;
   font-size: $fs_default;
   line-height: 170%;
@@ -19,16 +19,16 @@
 
   padding: 15px 20px;
 
-  border: 1px solid $c_grey;
+  border: 1px solid var(--c_grey);
   border-radius: $br_default;
-  background-color: $c_white;
-  color: $c_black;
+  background-color: var(--c_white);
+  color: var(--c_black);
 
   font-size: $fs_default;
   font-weight: 400;
 
   &:focus {
-    border-color: $c_black;
+    border-color: var(--c_black);
   }
 
   cursor: text;

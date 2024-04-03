@@ -77,3 +77,9 @@ main,
 h1 {
   font-size: 36px;
 }
+p,
+span,
+div,
+section {
+  word-break: break-word;
+}
