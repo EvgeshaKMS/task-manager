@@ -1,6 +1,9 @@
 @import 'src/assets/styles/templates';
 
 .button {
+  --c_main: var(--c_blue);
+  --c_secondary: var(--c_white);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +13,7 @@
   gap: 10px;
 
   border-radius: $br_default;
-  border: 1px solid var(--c_blue);
+  border: 1px solid var(--c_main);
 
   cursor: pointer;
   font-size: $fs_default;
@@ -18,47 +21,56 @@
 
   transition: all 0.15s ease-in-out;
 
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      svg {
+        path {
+          stroke: var(--c_main);
+        }
+      }
+    }
+  }
+
   &:active {
     opacity: 0.5;
+  }
+
+  &:disabled {
+    --c_main: var(--c_grey);
+
+    opacity: 0.5;
+    pointer-events: none;
   }
 }
 
 .outlined {
-  background-color: transparent;
-  color: var(--c_blue);
+  background-color: var(--c_secondary);
+  color: var(--c_main);
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--c_blue);
-      color: white;
+      background-color: var(--c_main);
+      color: var(--c_secondary);
     }
-  }
-
-  &:disabled {
-    color: var(--c_grey);
-    border: 1px solid var(--c_grey);
-    background-color: transparent;
-
-    opacity: 0.5;
-    pointer-events: none;
   }
 }
 .filled {
-  background-color: var(--c_blue);
-  color: white;
+  background-color: var(--c_main);
+  color: var(--c_secondary);
 
   @media (hover: hover) {
     &:hover {
-      background-color: transparent;
-      color: var(--c_blue);
+      background-color: var(--c_secondary);
+      color: var(--c_main);
     }
   }
+}
 
-  &:disabled {
-    border: 1px solid var(--c_grey);
-    background-color: var(--c_grey);
-
-    opacity: 0.5;
-    pointer-events: none;
-  }
+.red {
+  --c_main: var(--c_red);
 }

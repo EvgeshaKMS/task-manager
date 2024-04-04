@@ -9,6 +9,8 @@ const TextField = ({
   className = '',
   wrapperClassName = '',
   type = 'text',
+  validationMessage,
+  required,
   ...props
 }: TextFieldProps) => {
   const wrapperStyles = clsx(styles.wrapper, {
@@ -25,6 +27,8 @@ const TextField = ({
         </label>
       )}
       <input className={inputStyles} type={type} {...props} />
+
+      {validationMessage && <span className={styles.validation}>{validationMessage}</span>}
     </div>
   );
 };

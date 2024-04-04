@@ -5,4 +5,5 @@ export interface TextFieldProps
   label?: string;
   wrapperClassName?: string;
   className?: string;
+  validationMessage?: string;
 }

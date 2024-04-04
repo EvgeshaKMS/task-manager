@@ -7,10 +7,23 @@
   border-radius: $br_default;
 
   p {
+    svg,
+    span {
+      vertical-align: middle;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
     &:first-child {
       font-size: $fs_large;
       margin-bottom: 12px;
     }
+  }
+
+  &.completed {
+    opacity: 0.5;
   }
 }
 
@@ -23,4 +36,8 @@
   button:last-child {
     margin-left: auto;
   }
+}
+
+.deleteBtn {
+  padding: 10px 15px;
 }

@@ -33,8 +33,17 @@
 
   cursor: text;
 
-  &::-webkit-calendar-picker-indicator,
-  ::-webkit-date-and-time-value {
+  &::-webkit-calendar-picker-indicator:hover,
+  ::-webkit-date-and-time-value:hover {
     cursor: pointer;
+
+    background-color: var(--c_grey);
+    border-radius: $br_small;
   }
+}
+
+.validation {
+  margin-top: 6px;
+
+  color: var(--c_red);
 }
