@@ -17,6 +17,11 @@
 
   animation: fadeIn 0.5s ease-in;
 
+  &.onClose {
+    animation: fadeOut 0.5s ease-out;
+    opacity: 0;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -24,11 +29,6 @@
     to {
       opacity: 1;
     }
-  }
-
-  &.close {
-    animation: fadeOut 0.5s ease-out;
-    opacity: 0;
   }
 
   @keyframes fadeOut {
@@ -45,4 +45,29 @@
   padding: 20px;
   background-color: var(--c_white);
   border-radius: 12px;
+
+  animation: open 0.5s ease-in;
+
+  @keyframes open {
+    from {
+      transform: scale(0.5);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  &.onClose {
+    animation: close 0.5s ease-out;
+    transform: scale(0);
+  }
+
+  @keyframes close {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.5);
+    }
+  }
 }

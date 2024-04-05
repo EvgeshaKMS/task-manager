@@ -7,8 +7,13 @@ import { PopupProps } from './types';
 const Popup = ({ isOpen, onClose, children, className = '' }: PopupProps) => {
   const [isClosing, setIsClosing] = useState(false);
 
-  const popupStyles: string = clsx(styles.wrapper, {
-    [styles.close]: isClosing,
+  const wrapperStyles: string = clsx(styles.wrapper, {
+    [styles.onClose]: isClosing,
+    [className]: className,
+  });
+
+  const popupStyles: string = clsx(styles.content, {
+    [styles.onClose]: isClosing,
     [className]: className,
   });
 
@@ -35,9 +40,9 @@ const Popup = ({ isOpen, onClose, children, className = '' }: PopupProps) => {
     <div
       onAnimationEnd={handleAnimationEnd}
       onClick={() => setIsClosing(true)}
-      className={popupStyles}
+      className={wrapperStyles}
     >
-      <div className={styles.content} onClick={(event) => event.stopPropagation()}>
+      <div className={popupStyles} onClick={(event) => event.stopPropagation()}>
         {children}
       </div>
     </div>
