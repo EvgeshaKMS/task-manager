@@ -26,16 +26,6 @@
     height: 24px;
   }
 
-  @media (hover: hover) {
-    &:hover {
-      svg {
-        path {
-          stroke: var(--c_main);
-        }
-      }
-    }
-  }
-
   &:active {
     opacity: 0.5;
   }
@@ -56,6 +46,12 @@
     &:hover {
       background-color: var(--c_main);
       color: var(--c_secondary);
+
+      svg {
+        path {
+          stroke: var(--c_secondary);
+        }
+      }
     }
   }
 }
@@ -67,6 +63,12 @@
     &:hover {
       background-color: var(--c_secondary);
       color: var(--c_main);
+
+      svg {
+        path {
+          stroke: var(--c_main);
+        }
+      }
     }
   }
 }

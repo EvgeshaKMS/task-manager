@@ -2,7 +2,7 @@ import { TTask } from 'types/general';
 
 export interface TaskItemProps {
   item: TTask;
-  onDelete: () => void;
-  onComplete: () => void;
+  onDelete: (id: number) => void;
+  onComplete: (index: number) => void;
   counter: number;
 }

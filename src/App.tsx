@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, TaskItem, TextField } from 'components';
+import { Button, Popup, TaskItem, TextField } from 'components';
 import { formatDate } from './utils/formatDate';
 
 import { TTask } from './types/general';
@@ -10,18 +10,24 @@ import './assets/styles/theme.scss';
 import styles from './App.module.scss';
 
 function App() {
+  // inputs
   const [taskName, setTaskName] = useState('');
-  const [taskNameValidation, setTaskNameValidation] = useState('');
   const [date, setDate] = useState('');
-  const [dateValidation, setDateValidation] = useState('');
   const [time, setTime] = useState('');
+
+  // validation messages
+  const [taskNameValidation, setTaskNameValidation] = useState('');
+  const [dateValidation, setDateValidation] = useState('');
   const [timeValidation, setTimeValidation] = useState('');
+
   const [tasks, setTasks] = useState<TTask[]>([
     { id: 1, taskName: 'Название', date: '03.04.2024', time: '12:00', completed: false },
     { id: 2, taskName: 'Название2', date: '03.04.2024', time: '13:00', completed: true },
     { id: 3, taskName: 'Название3', date: '03.04.2024', time: '14:00', completed: false },
     { id: 4, taskName: 'Название4', date: '03.04.2024', time: '15:00', completed: false },
   ]);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const onSubmit = () => {
     if (!taskName) {
@@ -63,6 +69,10 @@ function App() {
     setTasks([...tasks]);
   };
 
+  const onPopupClose = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <div className='App'>
       <main>
@@ -102,16 +112,21 @@ function App() {
               />
             </div>
             <Button onClick={onSubmit}>Создать</Button>
+            <Button onClick={() => setIsPopupOpen(true)}>Модальное окно</Button>
           </div>
+
+          <Popup isOpen={isPopupOpen} onClose={onPopupClose}>
+            asdasd
+          </Popup>
 
           <ul className={styles.section}>
             {tasks.length > 0 &&
               tasks.map((task, index) => (
                 <TaskItem
                   item={task}
-                  onDelete={() => onDelete(task.id)}
+                  onDelete={onDelete}
                   counter={index + 1}
-                  onComplete={() => onComplete(index)}
+                  onComplete={onComplete}
                   key={task.id}
                 />
               ))}

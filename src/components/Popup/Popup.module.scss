@@ -1,0 +1,48 @@
+@import 'src/assets/styles/templates';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  z-index: 999;
+
+  animation: fadeIn 0.5s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  &.close {
+    animation: fadeOut 0.5s ease-out;
+    opacity: 0;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+.content {
+  padding: 20px;
+  background-color: var(--c_white);
+  border-radius: 12px;
+}
