@@ -9,13 +9,13 @@
   margin: 0 auto;
   padding: 0 30px;
 
-  .section:first-child {
-    max-width: 600px;
-  }
-
   section {
     max-width: 600px;
   }
+}
+
+.popup {
+  min-width: 700px;
 }
 
 .section {

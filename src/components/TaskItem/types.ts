@@ -5,4 +5,5 @@ export interface TaskItemProps {
   onDelete: (id: number) => void;
   onComplete: (index: number) => void;
   counter: number;
+  onEdit: () => void;
 }

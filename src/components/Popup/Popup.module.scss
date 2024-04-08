@@ -42,11 +42,35 @@
 }
 
 .content {
+  @include flex-col-gap(20px);
+  position: relative;
   padding: 20px;
   background-color: var(--c_white);
   border-radius: 12px;
 
   animation: open 0.5s ease-in;
+
+  h2 {
+    font-size: $fs_large;
+  }
+
+  &.onClose {
+    animation: close 0.5s ease-out;
+    transform: scale(0);
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+
+    &:hover {
+      path {
+        stroke: var(--c_dark);
+      }
+    }
+  }
 
   @keyframes open {
     from {
@@ -55,11 +79,6 @@
     to {
       transform: scale(1);
     }
-  }
-
-  &.onClose {
-    animation: close 0.5s ease-out;
-    transform: scale(0);
   }
 
   @keyframes close {

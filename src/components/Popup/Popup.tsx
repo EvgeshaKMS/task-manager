@@ -1,8 +1,9 @@
 import { useState, AnimationEvent, useEffect } from 'react';
 import clsx from 'clsx';
 
-import styles from './Popup.module.scss';
 import { PopupProps } from './types';
+import { ReactComponent as IcClose } from 'assets/icons/icon_close.svg';
+import styles from './Popup.module.scss';
 
 const Popup = ({ isOpen, onClose, children, className = '' }: PopupProps) => {
   const [isClosing, setIsClosing] = useState(false);
@@ -25,7 +26,11 @@ const Popup = ({ isOpen, onClose, children, className = '' }: PopupProps) => {
     }
   }, [isOpen]);
 
-  const handleAnimationEnd = (event: AnimationEvent<HTMLDivElement>) => {
+  const handleClosingAnimationStart = () => {
+    setIsClosing(true);
+  };
+
+  const handleClosingAnimationEnd = (event: AnimationEvent<HTMLDivElement>) => {
     if (event.animationName.includes('fadeOut')) {
       onClose();
       setIsClosing(false);
@@ -38,12 +43,16 @@ const Popup = ({ isOpen, onClose, children, className = '' }: PopupProps) => {
 
   return (
     <div
-      onAnimationEnd={handleAnimationEnd}
-      onClick={() => setIsClosing(true)}
+      onAnimationEnd={handleClosingAnimationEnd}
+      onClick={handleClosingAnimationStart}
       className={wrapperStyles}
     >
       <div className={popupStyles} onClick={(event) => event.stopPropagation()}>
         {children}
+
+        <button onClick={handleClosingAnimationStart} className={styles.closeBtn}>
+          <IcClose />
+        </button>
       </div>
     </div>
   );

@@ -47,11 +47,10 @@
 
   margin-top: 20px;
 
-  button:last-child {
+  button {
+    padding: 10px 15px;
+  }
+  .deleteBtn {
     margin-left: auto;
   }
-}
-
-.deleteBtn {
-  padding: 10px 15px;
 }

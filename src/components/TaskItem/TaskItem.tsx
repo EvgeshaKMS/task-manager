@@ -1,16 +1,16 @@
-import React, { useEffect, useState, AnimationEvent } from 'react';
+import React, { useState, AnimationEvent } from 'react';
 import clsx from 'clsx';
 
 import { Button } from 'components';
 
 import { TaskItemProps } from './types';
-
 import { ReactComponent as IcCalendar } from 'assets/icons/icon_calendar.svg';
 import { ReactComponent as IcTrash } from 'assets/icons/icon_trash.svg';
 import { ReactComponent as IcEdit } from 'assets/icons/icon_edit.svg';
+import { ReactComponent as IcCheck } from 'assets/icons/icon_check-circle.svg';
 import styles from './TaskItem.module.scss';
 
-const TaskItem = ({ item, onDelete, onComplete, counter }: TaskItemProps) => {
+const TaskItem = ({ item, onDelete, onComplete, onEdit, counter }: TaskItemProps) => {
   const [isSlideOut, setIsSlideOut] = useState(false);
 
   const itemStyles: string = clsx(styles.item, {
@@ -23,7 +23,7 @@ const TaskItem = ({ item, onDelete, onComplete, counter }: TaskItemProps) => {
   };
 
   const handleAnimationEnd = (e: AnimationEvent<HTMLLIElement>) => {
-    onDelete(item.id);
+    if (e.animationName.includes('slideOut')) onDelete(item.id);
   };
 
   return (
@@ -38,12 +38,13 @@ const TaskItem = ({ item, onDelete, onComplete, counter }: TaskItemProps) => {
         </span>
       </p>
       <div className={styles.buttons}>
-        {/* todo: продумать логику/дизайн */}
-        <Button onClick={completeTask}>Выполнено/Не выполнено</Button>
-        <Button theme='outlined'>
+        <Button onClick={completeTask} theme={item.completed ? 'outlined' : 'filled'}>
+          <IcCheck />
+        </Button>
+        <Button onClick={() => onEdit()} theme='outlined'>
           <IcEdit />
         </Button>
-        <Button onClick={() => setIsSlideOut(true)} color='red' className={styles.deleteBtn}>
+        <Button className={styles.deleteBtn} onClick={() => setIsSlideOut(true)} color='red'>
           <IcTrash />
         </Button>
       </div>

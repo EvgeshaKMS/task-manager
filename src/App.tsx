@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { Button, Popup, TaskItem, TextField } from 'components';
-import { formatDate } from './utils/formatDate';
+import { formatDate, formatDateToOriginal } from './utils/formatDate';
 
 import { TTask } from './types/general';
 
@@ -28,35 +28,49 @@ function App() {
   ]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isCreatePopup, setIsCreatePopup] = useState(true);
+  const [indexOfTheTask, setIndexOfTheTask] = useState<number | null>(null);
+
+  const resetValues = () => {
+    setTaskName('');
+    setDate('');
+    setTime('');
+    setTaskNameValidation('');
+    setDateValidation('');
+    setTimeValidation('');
+  };
 
   const onSubmit = () => {
-    if (!taskName) {
-      setTaskNameValidation('Поле Задача обязательно для заполнения');
-    }
-    if (!date) {
-      setDateValidation('Поле Дата обязательно для заполнения');
-    }
-    if (!time) {
-      setTimeValidation('Поле Время обязательно для заполнения');
+    const isError = !taskName || !date || !time;
+
+    if (isError) {
+      setTaskNameValidation(taskName ? '' : 'Поле Задача обязательно для заполнения');
+      setDateValidation(date ? '' : 'Поле Дата обязательно для заполнения');
+      setTimeValidation(time ? '' : 'Поле Время обязательно для заполнения');
     }
 
-    if (taskName && date && time) {
-      setTasks((prevState) => [
-        ...prevState,
-        {
-          id: prevState.length + 1,
-          taskName,
-          date: formatDate(date),
-          time,
-          completed: false,
-        },
-      ]);
-      setTaskName('');
-      setDate('');
-      setTime('');
-      setTaskNameValidation('');
-      setDateValidation('');
-      setTimeValidation('');
+    if (!isError) {
+      if (indexOfTheTask === null) {
+        setTasks((prevState) => [
+          ...prevState,
+          {
+            id: prevState.length + 1,
+            taskName,
+            date: formatDate(date),
+            time,
+            completed: false,
+          },
+        ]);
+      }
+
+      if (indexOfTheTask !== null) {
+        tasks[indexOfTheTask].taskName = taskName;
+        tasks[indexOfTheTask].date = formatDate(date);
+        tasks[indexOfTheTask].time = time;
+        setTasks([...tasks]);
+      }
+
+      onPopupClose();
     }
   };
 
@@ -69,8 +83,20 @@ function App() {
     setTasks([...tasks]);
   };
 
+  const onEditPopupOpen = (index: number) => {
+    setIndexOfTheTask(index);
+    setIsCreatePopup(false);
+
+    setTaskName(tasks[index].taskName);
+    setDate(formatDateToOriginal(tasks[index].date));
+    setTime(tasks[index].time);
+
+    setIsPopupOpen(true);
+  };
+
   const onPopupClose = () => {
     setIsPopupOpen(false);
+    resetValues();
   };
 
   return (
@@ -79,8 +105,32 @@ function App() {
         <div className={styles.container}>
           <h1>Менеджер задач</h1>
 
-          <div className={styles.section}>
-            <h2>Создание задачи</h2>
+          <Button
+            onClick={() => {
+              setIndexOfTheTask(null);
+              setIsCreatePopup(true);
+              setIsPopupOpen(true);
+            }}
+          >
+            Создать
+          </Button>
+
+          <ul className={styles.section}>
+            {tasks.length > 0 &&
+              tasks.map((task, index) => (
+                <TaskItem
+                  item={task}
+                  onDelete={onDelete}
+                  counter={index + 1}
+                  onComplete={onComplete}
+                  onEdit={() => onEditPopupOpen(index)}
+                  key={task.id}
+                />
+              ))}
+          </ul>
+
+          <Popup isOpen={isPopupOpen} onClose={onPopupClose} className={styles.popup}>
+            <h2>{isCreatePopup ? 'Создание задачи' : 'Редактирование задачи'}</h2>
 
             <TextField
               label='Задача'
@@ -111,26 +161,8 @@ function App() {
                 validationMessage={timeValidation}
               />
             </div>
-            <Button onClick={onSubmit}>Создать</Button>
-            <Button onClick={() => setIsPopupOpen(true)}>Модальное окно</Button>
-          </div>
-
-          <Popup isOpen={isPopupOpen} onClose={onPopupClose}>
-            asdasd
+            <Button onClick={onSubmit}>{isCreatePopup ? 'Создать' : 'Редактировать'}</Button>
           </Popup>
-
-          <ul className={styles.section}>
-            {tasks.length > 0 &&
-              tasks.map((task, index) => (
-                <TaskItem
-                  item={task}
-                  onDelete={onDelete}
-                  counter={index + 1}
-                  onComplete={onComplete}
-                  key={task.id}
-                />
-              ))}
-          </ul>
         </div>
       </main>
     </div>
