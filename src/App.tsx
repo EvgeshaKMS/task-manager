@@ -5,9 +5,11 @@ import { formatDate, formatDateToOriginal } from './utils/formatDate';
 
 import { TTask } from './types/general';
 
+import { ReactComponent as IcFile } from 'assets/icons/icon_file.svg';
 import './assets/styles/normalize.scss';
 import './assets/styles/theme.scss';
 import styles from './App.module.scss';
+import { sortByDate } from './utils/sortByDate';
 
 function App() {
   // inputs
@@ -20,12 +22,14 @@ function App() {
   const [dateValidation, setDateValidation] = useState('');
   const [timeValidation, setTimeValidation] = useState('');
 
-  const [tasks, setTasks] = useState<TTask[]>([
-    { id: 1, taskName: 'Название', date: '03.04.2024', time: '12:00', completed: false },
-    { id: 2, taskName: 'Название2', date: '03.04.2024', time: '13:00', completed: true },
-    { id: 3, taskName: 'Название3', date: '03.04.2024', time: '14:00', completed: false },
-    { id: 4, taskName: 'Название4', date: '03.04.2024', time: '15:00', completed: false },
-  ]);
+  const [tasks, setTasks] = useState<TTask[]>(
+    [
+      { id: 1, taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
+      { id: 3, taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: false },
+      { id: 4, taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
+      { id: 2, taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: true },
+    ].sort(sortByDate),
+  );
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCreatePopup, setIsCreatePopup] = useState(true);
@@ -51,16 +55,18 @@ function App() {
 
     if (!isError) {
       if (indexOfTheTask === null) {
-        setTasks((prevState) => [
-          ...prevState,
-          {
-            id: prevState.length + 1,
-            taskName,
-            date: formatDate(date),
-            time,
-            completed: false,
-          },
-        ]);
+        setTasks((prevState) =>
+          [
+            ...prevState,
+            {
+              id: prevState.length + 1,
+              taskName,
+              date: formatDate(date),
+              time,
+              completed: false,
+            },
+          ].sort(sortByDate),
+        );
       }
 
       if (indexOfTheTask !== null) {
@@ -116,17 +122,23 @@ function App() {
           </Button>
 
           <ul className={styles.section}>
-            {tasks.length > 0 &&
+            {tasks.length > 0 ? (
               tasks.map((task, index) => (
                 <TaskItem
                   item={task}
-                  onDelete={onDelete}
+                  onDelete={() => onDelete(task.id)}
                   counter={index + 1}
-                  onComplete={onComplete}
+                  onComplete={() => onComplete(index)}
                   onEdit={() => onEditPopupOpen(index)}
                   key={task.id}
                 />
-              ))}
+              ))
+            ) : (
+              <div className={styles.plug}>
+                <IcFile />
+                <h2>Список пуст!</h2>
+              </div>
+            )}
           </ul>
 
           <Popup isOpen={isPopupOpen} onClose={onPopupClose} className={styles.popup}>

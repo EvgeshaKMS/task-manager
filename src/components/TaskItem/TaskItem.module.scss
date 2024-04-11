@@ -6,6 +6,8 @@
   border: 1px solid var(--c_grey);
   border-radius: $br_default;
 
+  box-shadow: 3px 3px 5px var(--c_grey);
+
   p {
     svg,
     span {
@@ -28,10 +30,12 @@
 
   &.cardSlideOut {
     animation: slideOut 0.5s ease-out;
+    opacity: 0;
   }
 
   @keyframes slideOut {
     from {
+      opacity: 1;
       transform: translateX(0);
     }
     to {

@@ -18,12 +18,8 @@ const TaskItem = ({ item, onDelete, onComplete, onEdit, counter }: TaskItemProps
     [styles.cardSlideOut]: isSlideOut,
   });
 
-  const completeTask = () => {
-    onComplete(counter - 1);
-  };
-
   const handleAnimationEnd = (e: AnimationEvent<HTMLLIElement>) => {
-    if (e.animationName.includes('slideOut')) onDelete(item.id);
+    if (e.animationName.includes('slideOut')) onDelete();
   };
 
   return (
@@ -38,7 +34,7 @@ const TaskItem = ({ item, onDelete, onComplete, onEdit, counter }: TaskItemProps
         </span>
       </p>
       <div className={styles.buttons}>
-        <Button onClick={completeTask} theme={item.completed ? 'outlined' : 'filled'}>
+        <Button onClick={onComplete} theme={item.completed ? 'outlined' : 'filled'}>
           <IcCheck />
         </Button>
         <Button onClick={() => onEdit()} theme='outlined'>
