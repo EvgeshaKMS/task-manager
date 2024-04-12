@@ -1,5 +1,5 @@
 export type TTask = {
-  id: number;
+  id: string;
   taskName: string;
   date: string;
   time: string;

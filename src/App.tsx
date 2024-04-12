@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-import { Button, Popup, TaskItem, TextField } from 'components';
+import { Button, Pagination, Popup, TaskItem, TextField } from 'components';
 import { formatDate, formatDateToOriginal } from './utils/formatDate';
+import { sortByDate } from './utils/sortByDate';
 
 import { TTask } from './types/general';
 
@@ -9,7 +11,6 @@ import { ReactComponent as IcFile } from 'assets/icons/icon_file.svg';
 import './assets/styles/normalize.scss';
 import './assets/styles/theme.scss';
 import styles from './App.module.scss';
-import { sortByDate } from './utils/sortByDate';
 
 function App() {
   // inputs
@@ -24,16 +25,143 @@ function App() {
 
   const [tasks, setTasks] = useState<TTask[]>(
     [
-      { id: 1, taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
-      { id: 3, taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: false },
-      { id: 4, taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
-      { id: 2, taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: true },
+      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
+      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
+      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
+      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
+      {
+        id: uuidv4(),
+        taskName: 'Название123',
+        date: '01.04.2024',
+        time: '13:20',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название231',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название2xzZx',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
+      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
+      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
+      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
+      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
+      {
+        id: uuidv4(),
+        taskName: 'Название123',
+        date: '01.04.2024',
+        time: '13:20',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название231',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название2xzZx',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
+      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
+      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
+      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
+      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
+      {
+        id: uuidv4(),
+        taskName: 'Название123',
+        date: '01.04.2024',
+        time: '13:20',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название231',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название2xzZx',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
+      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
+      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
+      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
+      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
+      {
+        id: uuidv4(),
+        taskName: 'Название123',
+        date: '01.04.2024',
+        time: '13:20',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название231',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название2xzZx',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
+      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
+      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
+      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
+      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
+      {
+        id: uuidv4(),
+        taskName: 'Название123',
+        date: '01.04.2024',
+        time: '13:20',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название231',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      {
+        id: uuidv4(),
+        taskName: 'Название2xzZx',
+        date: '01.04.2024',
+        time: '13:04',
+        completed: false,
+      },
+      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
     ].sort(sortByDate),
   );
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCreatePopup, setIsCreatePopup] = useState(true);
   const [indexOfTheTask, setIndexOfTheTask] = useState<number | null>(null);
+  const [page, setPage] = useState<number>(1);
 
   const resetValues = () => {
     setTaskName('');
@@ -59,7 +187,7 @@ function App() {
           [
             ...prevState,
             {
-              id: prevState.length + 1,
+              id: uuidv4(),
               taskName,
               date: formatDate(date),
               time,
@@ -80,13 +208,17 @@ function App() {
     }
   };
 
-  const onDelete = (id: number) => {
+  const onDelete = (id: string) => {
     setTasks((prevState) => prevState.filter((item) => item.id !== id));
   };
 
   const onComplete = (index: number) => {
     tasks[index].completed = !tasks[index].completed;
     setTasks([...tasks]);
+  };
+
+  const paginatedList = () => {
+    return tasks.filter((task, index) => index + 1 >= (page - 1) * 5 && index + 1 <= page * 5);
   };
 
   const onEditPopupOpen = (index: number) => {
@@ -122,8 +254,8 @@ function App() {
           </Button>
 
           <ul className={styles.section}>
-            {tasks.length > 0 ? (
-              tasks.map((task, index) => (
+            {paginatedList().length > 0 ? (
+              paginatedList().map((task, index) => (
                 <TaskItem
                   item={task}
                   onDelete={() => onDelete(task.id)}
@@ -140,6 +272,12 @@ function App() {
               </div>
             )}
           </ul>
+
+          <Pagination
+            currentPage={page}
+            setPage={setPage}
+            totalPages={Math.ceil(tasks.length / 5)}
+          />
 
           <Popup isOpen={isPopupOpen} onClose={onPopupClose} className={styles.popup}>
             <h2>{isCreatePopup ? 'Создание задачи' : 'Редактирование задачи'}</h2>
