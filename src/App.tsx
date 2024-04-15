@@ -50,111 +50,6 @@ function App() {
         time: '13:04',
         completed: false,
       },
-      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
-      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
-      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
-      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
-      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
-      {
-        id: uuidv4(),
-        taskName: 'Название123',
-        date: '01.04.2024',
-        time: '13:20',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название231',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название2xzZx',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
-      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
-      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
-      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
-      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
-      {
-        id: uuidv4(),
-        taskName: 'Название123',
-        date: '01.04.2024',
-        time: '13:20',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название231',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название2xzZx',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
-      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
-      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
-      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
-      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
-      {
-        id: uuidv4(),
-        taskName: 'Название123',
-        date: '01.04.2024',
-        time: '13:20',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название231',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название2xzZx',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
-      { id: uuidv4(), taskName: 'Название', date: '14.04.2024', time: '12:00', completed: false },
-      { id: uuidv4(), taskName: 'Название3', date: '02.04.2024', time: '14:02', completed: true },
-      { id: uuidv4(), taskName: 'Название4', date: '02.04.2024', time: '14:01', completed: false },
-      { id: uuidv4(), taskName: 'Название2', date: '01.04.2024', time: '13:00', completed: false },
-      {
-        id: uuidv4(),
-        taskName: 'Название123',
-        date: '01.04.2024',
-        time: '13:20',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название231',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        taskName: 'Название2xzZx',
-        date: '01.04.2024',
-        time: '13:04',
-        completed: false,
-      },
-      { id: uuidv4(), taskName: 'Нdwdqw', date: '01.04.2024', time: '13:02', completed: true },
     ].sort(sortByDate),
   );
 
@@ -217,10 +112,6 @@ function App() {
     setTasks([...tasks]);
   };
 
-  const paginatedList = () => {
-    return tasks.filter((task, index) => index + 1 >= (page - 1) * 5 && index + 1 <= page * 5);
-  };
-
   const onEditPopupOpen = (index: number) => {
     setIndexOfTheTask(index);
     setIsCreatePopup(false);
@@ -254,17 +145,20 @@ function App() {
           </Button>
 
           <ul className={styles.section}>
-            {paginatedList().length > 0 ? (
-              paginatedList().map((task, index) => (
-                <TaskItem
-                  item={task}
-                  onDelete={() => onDelete(task.id)}
-                  counter={index + 1}
-                  onComplete={() => onComplete(index)}
-                  onEdit={() => onEditPopupOpen(index)}
-                  key={task.id}
-                />
-              ))
+            {tasks.length > 0 ? (
+              tasks.map((task, index) => {
+                if (index + 1 >= (page - 1) * 5 && index + 1 <= page * 5)
+                  return (
+                    <TaskItem
+                      item={task}
+                      onDelete={() => onDelete(task.id)}
+                      counter={index + 1}
+                      onComplete={() => onComplete(index)}
+                      onEdit={() => onEditPopupOpen(index)}
+                      key={task.id}
+                    />
+                  );
+              })
             ) : (
               <div className={styles.plug}>
                 <IcFile />
